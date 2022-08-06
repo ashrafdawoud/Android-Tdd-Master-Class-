@@ -1,8 +1,12 @@
 package com.example.testimplementation.unitTest
 
+import com.example.outsideintddexample.acceptancetests.MainCoroutineScopeRule
 import com.example.testimplementation.Car
 import com.example.testimplementation.Engine
 import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.*
 
@@ -31,13 +35,16 @@ class CarSould {
     private val engine: Engine = mock(Engine::class.java)
     private val car = Car(6.0 , engine)
 
+    @get:Rule
+    var coroutinesTestRule = MainCoroutineScopeRule()
+
     @Test
-    fun `loose fuel when it turns on `() {
+    fun `loose fuel when it turns on `() = runBlockingTest{
         car.turnsOn()
         assertEquals(5.5, car.fuel)
     }
     @Test
-    fun `should turnon it's engin`(){
+    fun `should turnon it's engin`() = runBlockingTest{
         car.turnsOn()
 
         verify(engine , times(1)).turnon()

@@ -4,7 +4,7 @@ class Car(
     var fuel: Double,
     var engine: Engine
 ) {
-    fun turnsOn() {
+    suspend fun turnsOn() {
         fuel-=0.5
         engine.turnon()
     }
