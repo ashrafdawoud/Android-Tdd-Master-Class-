@@ -24,8 +24,7 @@ class CarFreature {
     @Test
     fun `engine tempreture should be encreases when engin is turned on `() = runBlockingTest{
         car.turnsOn()
-
-        assertEquals(95.0 , engine.tempreture)
-        assertTrue(engine.isTurnedOn)
+        assertEquals(95.0 , car.engine.tempreture)
+        assertTrue(car.engine.isTurnedOn)
     }
 }

@@ -4,6 +4,7 @@ import com.example.outsideintddexample.acceptancetests.MainCoroutineScopeRule
 import com.example.testimplementation.Engine
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
@@ -16,8 +17,10 @@ class EngineShould {
 
     @Test
     fun turnedOn() = runBlockingTest{
-        engine.turnon()
-        assertEquals(engine.tempreture , 95.0)
+        val flow = engine.turnon()
+        flow.collect {
+            assertEquals(it , 95.0)
+        }
         assertTrue(engine.isTurnedOn)
     }
 }
